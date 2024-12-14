@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Quick News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Slight transparency */
+            border-radius: 20px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .container p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 90%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #6a11cb;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            pointer-events: none;
+            transition: top 0.3s, font-size 0.3s, color 0.3s;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: 10px;
+            font-size: 0.8rem;
+            color: #6a11cb;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .link {
+            display: block;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #2575fc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .link:hover {
+            color: #6a11cb;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login to Quick News</h1>
+        <p>Stay updated with the latest news!</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder=" " required>
+                <label>Enter Username</label>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder=" " required>
+                <label>Enter Password</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <a href="{% url 'register' %}" class="link">Don't have an account? Register here</a>
+
+        <div class="tooltip">
+            <p>Need Help?</p>
+            <span class="tooltiptext">Enter your username and password to log in!</span>
+        </div>
+    </div>
+</body>
+</html>
