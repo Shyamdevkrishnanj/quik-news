@@ -1,0 +1,88 @@
+<!-- view_notes.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4A90E2;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .list-group {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .list-group-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .list-group-item:hover {
+            background-color: #e0f7fa;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        small {
+            display: block;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .no-notes {
+            font-size: 1.2em;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Notes</h1>
+        {% if notes %}
+            <ul class="list-group">
+                {% for note in notes %}
+                    <li class="list-group-item">
+                        <p>{{ note.content }}</p>
+                        <small>Created on: {{ note.created_at }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-notes">No notes saved yet. Start adding your notes!</p>
+        {% endif %}
+    </div>
+</body>
+</html>

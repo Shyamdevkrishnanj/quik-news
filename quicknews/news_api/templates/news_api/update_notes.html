@@ -1,0 +1,26 @@
+<!-- Notepad Modal -->
+<div class="modal fade" id="notepadModal" tabindex="-1" aria-labelledby="notepadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-3">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="notepadModalLabel">Notepad</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'update_notes' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="note_content" class="form-label fs-5">Your Notes</label>
+                        <textarea id="note_content" name="content" class="form-control border-primary" rows="8">{{ form.content.value }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Save Notes</button>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="{% url 'view_notes' %}" class="btn btn-outline-primary w-100 mt-3">View Saved Notes</a>
+            </div>
+        </div>
+    </div>
+</div>

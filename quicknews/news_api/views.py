@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import requests
+from .models import Note
+from .forms import NoteForm
 
 API_KEY = '2a4fffc220984c589f39074d28539acb'
 
@@ -64,10 +66,20 @@ def home(request):
 
 @login_required
 def update_notes(request):
-    if request.method == 'POST':
-        notes = request.POST.get('notes', '')
-        profile = request.user.profile
-        profile.notes = notes
-        profile.save()
-        messages.success(request, 'Notes saved successfully')
-    return redirect('home')
+    if request.method == "POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False) 
+            note.user = request.user  
+            note.save()  
+            return redirect('view_notes')  
+    else:
+        form = NoteForm()
+
+    return render(request, 'news_api/update_notes.html', {'form': form})
+
+
+@login_required
+def view_notes(request):
+    notes = Note.objects.filter(user=request.user).order_by('-created_at')  
+    return render(request, 'news_api/view_notes.html', {'notes': notes})
